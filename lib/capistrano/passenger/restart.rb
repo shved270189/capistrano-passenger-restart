@@ -1,9 +1,1 @@
-require "capistrano/passenger/restart/version"
-
-module Capistrano
-  module Passenger
-    module Restart
-      # Your code goes here...
-    end
-  end
-end
+load File.expand_path("../../tasks/passenger.rake", __FILE__)
