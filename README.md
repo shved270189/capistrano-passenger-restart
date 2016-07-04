@@ -1,4 +1,5 @@
 # Capistrano::Passenger::Restart
+[![Gem Version](https://badge.fury.io/rb/capistrano-passenger-restart.svg)](https://badge.fury.io/rb/capistrano-passenger-restart)
 
 Restart Passenger support for Capistrano v3
 
