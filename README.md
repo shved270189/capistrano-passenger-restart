@@ -1,14 +1,13 @@
 # Capistrano::Passenger::Restart
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/passenger/restart`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Restart Passenger support for Capistrano v3
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
+gem 'capistrano', '~> 3.0'
 gem 'capistrano-passenger-restart'
 ```
 
@@ -16,19 +15,32 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install capistrano-passenger-restart
-
 ## Usage
 
-TODO: Write usage instructions here
+Require in Capfile to use the default task:
 
-## Development
+```ruby
+# Capfile
+require 'capistrano/passenger/restart'
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Use task for restart Passenger in your deploy configuration:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+# config/deploy.rb
+namespace :deploy do
+  after  :finishing,    :restart
+
+  task :restart do
+    on roles(:app) do
+      invoke 'passenger:restart'
+    end
+  end
+end
+```
+
+And you should be good to go!
+
 
 ## Contributing
 
@@ -38,4 +50,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
